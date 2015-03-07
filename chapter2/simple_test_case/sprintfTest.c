@@ -10,10 +10,7 @@ int main(int argc, const char *argv[]){
 	return UnityMain(argc, argv, runAllTests);
 }
 
-static void runAllTests(void){
-	RUN_TEST_GROUP(sprintf);
-}
-
+// Define test group & test_cases 
 TEST_GROUP(sprintf);
 
 TEST_SETUP(sprintf){
@@ -32,7 +29,13 @@ TEST(sprintf, NoFormatOperation){
 }
 
 
-
+// define test group runner 
 TEST_GROUP_RUNNER(sprintf){
 	RUN_TEST_CASE(sprintf, NoFormatOperation);
+}
+
+
+// define function for UnityMain
+static void runAllTests(void){
+	RUN_TEST_GROUP(sprintf);
 }
