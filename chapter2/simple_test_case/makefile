@@ -1,31 +1,21 @@
-CLEANUP = rm -f
-TARGET_EXTENSION=.out
-
+CC = gcc
+CLFAGS = -std=c99 -Wall
 
 UNITY_ROOT = ../../Unity-master
-C_COMPILER = gcc
 
-CFLAGS=-std=c99
-CFLAGS += -Wall
+SRC = $(UNITY_ROOT)/src/unity.c
+SRC += sprintfTest.c
 
+INC_DIRS = -I$(UNITY_ROOT)/src
+SYMBOLS = -DTEST
 
-TARGET_BASE1=sprintfTest
+TARGET = sprintfTest.out
 
-TARGET1 = $(TARGET_BASE1)$(TARGET_EXTENSION)
-
-SRC_FILES1=$(UNITY_ROOT)/src/unity.c  tests/sprintfTest.c
-
-INC_DIRS=-Isrc -I$(UNITY_ROOT)/src
-SYMBOLS=-DTEST
 
 all: clean default
 
 default:
-#	ruby auto/generate_test_runner.rb test/TestProductionCode.c  test/test_runners/TestProductionCode_Runner.c
-#	ruby auto/generate_test_runner.rb test/TestProductionCode2.c test/test_runners/TestProductionCode2_Runner.c
-	$(C_COMPILER) $(CFLAGS) $(INC_DIRS) $(SYMBOLS) $(SRC_FILES1) -o $(TARGET1)
-	./$(TARGET1)
+	$(CC) $(CLFAGS) $(INC_DIRS) $(SRC) $(SYMBOLS) -o $(TARGET)
 
 clean:
-	$(CLEANUP) ./$(TARGET1)
-
+	-rm -f $(TARGET)
